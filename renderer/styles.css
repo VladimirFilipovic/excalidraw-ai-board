@@ -1,0 +1,342 @@
+:root {
+  --exd-ink: #1e1e24;
+  --exd-muted: #6b6b76;
+  --exd-paper: #ffffff;
+  --exd-line: #e3e2ea;
+  --exd-violet: #6965db;
+  --exd-violet-soft: #ecebff;
+  --exd-amber: #e8590c;
+  --exd-amber-soft: #fff1e6;
+  --exd-grey: #adb5bd;
+  --exd-red: #c92a2a;
+  --exd-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html,
+body,
+#root,
+.exd-root {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.exd-root.commenting .excalidraw canvas.interactive {
+  cursor: crosshair !important;
+}
+
+/* ---------- toolbar (top-right) ---------- */
+
+.exd-toolbar {
+  display: flex;
+  gap: 6px;
+}
+
+.exd-btn {
+  font: 500 13px var(--exd-font);
+  color: var(--exd-ink);
+  background: var(--exd-paper);
+  border: 1px solid var(--exd-line);
+  border-radius: 8px;
+  padding: 0 10px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.exd-btn:hover {
+  background: #f5f5f9;
+}
+.exd-btn.primary {
+  background: var(--exd-violet);
+  border-color: var(--exd-violet);
+  color: #fff;
+}
+.exd-btn.primary:hover {
+  background: #5b57d1;
+}
+.exd-btn.primary:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.exd-btn.active {
+  background: var(--exd-violet-soft);
+  border-color: var(--exd-violet);
+}
+.exd-btn.ghost {
+  height: 30px;
+  border-color: transparent;
+  background: transparent;
+}
+.exd-btn.ghost:hover {
+  background: #f1f1f5;
+}
+.exd-pop-actions .exd-btn.primary {
+  height: 30px;
+}
+.exd-btn.danger {
+  color: var(--exd-red);
+}
+
+.exd-badge {
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 5px;
+  color: #fff;
+}
+.exd-badge.waiting {
+  background: var(--exd-amber);
+}
+.exd-badge.answered {
+  background: var(--exd-violet);
+}
+
+/* ---------- overlay ---------- */
+
+.exd-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  font-family: var(--exd-font);
+}
+.exd-layer > * {
+  pointer-events: auto;
+}
+
+.exd-pin {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 13px 13px 13px 2px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(30, 30, 36, 0.25);
+  color: #fff;
+  font: 700 12px var(--exd-font);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transition: transform 0.1s;
+}
+.exd-pin:hover,
+.exd-pin.open {
+  transform: scale(1.15);
+}
+.exd-pin.waiting {
+  background: var(--exd-amber);
+}
+.exd-pin.answered {
+  background: var(--exd-violet);
+}
+.exd-pin.resolved {
+  background: var(--exd-grey);
+}
+
+.exd-point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--exd-amber);
+  box-shadow: 0 0 0 4px rgba(232, 89, 12, 0.2);
+}
+
+.exd-pop {
+  position: absolute;
+  width: 320px;
+  background: var(--exd-paper);
+  color: var(--exd-ink);
+  border: 1px solid var(--exd-line);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(30, 30, 36, 0.16);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+.exd-pop-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--exd-muted);
+}
+.exd-pop textarea {
+  font: 13px/1.4 var(--exd-font);
+  color: var(--exd-ink);
+  background: #fafafc;
+  border: 1px solid var(--exd-line);
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 64px;
+  resize: vertical;
+  outline: none;
+}
+.exd-pop textarea:focus {
+  border-color: var(--exd-violet);
+  background: #fff;
+}
+.exd-pop-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.exd-hint {
+  margin-right: auto;
+  font-size: 11px;
+  color: var(--exd-muted);
+}
+.exd-x {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--exd-muted);
+  cursor: pointer;
+}
+
+.exd-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.exd-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+.exd-msg b {
+  font-size: 11px;
+  color: var(--exd-muted);
+}
+.exd-msg.user {
+  background: var(--exd-amber-soft);
+}
+.exd-msg.agent {
+  background: var(--exd-violet-soft);
+}
+.exd-msg.waiting {
+  font-style: italic;
+  color: var(--exd-muted);
+  padding: 2px 9px;
+}
+
+.exd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  flex: none;
+}
+.exd-dot.waiting {
+  background: var(--exd-amber);
+}
+.exd-dot.answered {
+  background: var(--exd-violet);
+}
+.exd-dot.resolved {
+  background: var(--exd-grey);
+}
+
+.exd-mode-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 70px;
+  transform: translateX(-50%);
+  background: var(--exd-ink);
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: 8px;
+}
+.exd-mode-hint button {
+  color: #c9c7ff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  font: inherit;
+}
+
+/* ---------- threads panel ---------- */
+
+.exd-panel {
+  position: fixed;
+  top: 64px;
+  right: 12px;
+  bottom: 70px;
+  width: 300px;
+  z-index: 6;
+  background: var(--exd-paper);
+  color: var(--exd-ink);
+  border: 1px solid var(--exd-line);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(30, 30, 36, 0.12);
+  font-family: var(--exd-font);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.exd-panel-head {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 12px 8px;
+}
+.exd-empty {
+  color: var(--exd-muted);
+  font-size: 13px;
+  padding: 0 12px;
+}
+.exd-row {
+  display: grid;
+  grid-template-columns: 10px auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 6px;
+  text-align: left;
+  border: 0;
+  border-top: 1px solid var(--exd-line);
+  background: transparent;
+  padding: 9px 12px;
+  cursor: pointer;
+  font: 13px var(--exd-font);
+  color: var(--exd-ink);
+}
+.exd-row:hover,
+.exd-row.open {
+  background: #f6f6fa;
+}
+.exd-row-n {
+  font-weight: 700;
+}
+.exd-row-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.exd-row-meta {
+  grid-column: 3;
+  font-size: 11px;
+  color: var(--exd-muted);
+}
